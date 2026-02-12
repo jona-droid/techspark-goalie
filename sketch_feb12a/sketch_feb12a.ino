@@ -1,34 +1,36 @@
-const int ledRed = 2;    // Left Goalie
-const int ledGreen = 4;  // Right Goalie
+#include <Servo.h>
+
+Servo goalieServo;  // Create servo object
+
+// Define positions (Adjust these angles if your servo is reversed!)
+const int POS_LEFT = 0;   // Move to 0 degrees
+const int POS_CENTER = 90; // Stay at 90 degrees
+const int POS_RIGHT = 180; // Move to 180 degrees
 
 char incomingByte;
 
 void setup() {
   Serial.begin(9600);
-  pinMode(ledRed, OUTPUT);
-  pinMode(ledGreen, OUTPUT);
+  
+  // Attach servo to Pin 9
+  goalieServo.attach(9);
+  
+  // Start at center
+  goalieServo.write(POS_CENTER);
 }
 
 void loop() {
   if (Serial.available() > 0) {
     incomingByte = Serial.read();
 
-    // Reset both to OFF initiall
-    digitalWrite(ledRed, LOW);
-    digitalWrite(ledGreen, LOW);
-
     if (incomingByte == 'L') {
-      // GOALIE MOVES LEFT
-      digitalWrite(ledRed, HIGH);
+      goalieServo.write(POS_LEFT);
     } 
     else if (incomingByte == 'C') {
-      // GOALIE STAYS CENTER (Both lights on)
-      digitalWrite(ledRed, HIGH);
-      digitalWrite(ledGreen, HIGH);
+      goalieServo.write(POS_CENTER);
     } 
     else if (incomingByte == 'R') {
-      // GOALIE MOVES RIGHT
-      digitalWrite(ledGreen, HIGH);
+      goalieServo.write(POS_RIGHT);
     }
   }
 }
