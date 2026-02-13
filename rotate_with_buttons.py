@@ -4,7 +4,7 @@ import serial
 import time
 
 # --- CONFIGURATION ---
-serial_port = '/dev/cu.usbmodem1301'
+serial_port = '/dev/cu.usbmodem1401'
 baud_rate = 9600
 
 # Connect to Arduino
