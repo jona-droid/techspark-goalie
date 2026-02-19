@@ -6,7 +6,7 @@ import numpy as np
 # --- CONFIGURATION ---
 # CHANGE THIS to your Arduino's port! 
 # (Check Arduino IDE -> Tools -> Port)
-serial_port = '/dev/cu.usbmodem1401' 
+serial_port = '/dev/cu.usbmodem1301' 
 baud_rate = 9600
 
 # Connect to Arduino
@@ -26,10 +26,10 @@ if not cap.isOpened():
     exit()
 print("Camera started successfully")
 
-# Define "Blue" color range (adjust for your ball color)
-# If your ball is red/green, change these values!
-lower_color = np.array([80, 100, 100])   # Lower Blue
-upper_color = np.array([130, 255, 255]) # Upper Blue
+# Define "Orange" color range for ping pong ball
+# Higher saturation to avoid light brown tables
+lower_color = np.array([10, 150, 150])   # Lower Orange
+upper_color = np.array([25, 255, 255])   # Upper Orange
 
 frame_count = 0
 
